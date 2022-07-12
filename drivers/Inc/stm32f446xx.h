@@ -40,10 +40,33 @@
 #define GPIOH_BASEADDR                (AHB1PERIPH_BASE + 0x1C00)
 
 /*
-* peripheral base addresses whitch are hanging on APB1 base
+* peripheral base addresses whitch are hanging on APB1 base 
+* 
 */
 
 #define I2C1_BASEADDR                 (APB1PERIPH_BASE + 0x0000) /* Episódio  81 /*
+#define I2C2_BASEADDR                 (APB1PERIPH_BASE + 0x0000)
+#define I2C3_BASEADDR                 (APB1PERIPH_BASE + 0x0000)
+#define SPI2_BASEADDR                 (APB1PERIPH_BASE + 0x0000)
+#define SPI3_BASEADDR                 (APB1PERIPH_BASE + 0x0000)
+#define USART2_BASEADDR               (APB1PERIPH_BASE + 0x0000)
+#define USART3_BASEADDR               (APB1PERIPH_BASE + 0x0000)
+#define USART4_BASEADDR               (APB1PERIPH_BASE + 0x0000)
+#define USART4_BASEADDR               (APB1PERIPH_BASE + 0x0000)
+#define USART5_BASEADDR               (APB1PERIPH_BASE + 0x0000)
+
+/*
+* peripheral base addresses whitch are hanging on APB2 base
+*/
+
+#define SPI1_BASEADDR                 (APB2PERIPH_BASE + 0x0000) /* Episódio  81 /*
+#define USART1_BASEADDR               (APB2PERIPH_BASE + 0x0000)
+#define USART6_BASEADDR               (APB2PERIPH_BASE + 0x0000)
+#define EXIT_BASEADDR                 (APB2PERIPH_BASE + 0x0000)
+#define SYSCFG_BASEADDR               (APB2PERIPH_BASE + 0x0000)
+
+
+
 
 
 #endif /* INC_STM32F446XX_H_ */
