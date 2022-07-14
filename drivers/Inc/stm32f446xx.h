@@ -40,8 +40,7 @@
 #define GPIOH_BASEADDR                (AHB1PERIPH_BASEADDR + 0x1C00)
 
 /*
-* peripheral base addresses whitch are hanging on APB1 base /* Episódio  81 */
-* 
+* peripheral base addresses whitch are hanging on APB1 base    --- Episódio  81 
 */
 
 #define I2C1_BASEADDR                 (APB1PERIPH_BASEADDR + 0x5400) 
@@ -65,6 +64,47 @@
 #define USART6_BASEADDR               (APB2PERIPH_BASEADDR + 0x1400)
 #define EXIT_BASEADDR                 (APB2PERIPH_BASEADDR + 0x3C00)
 #define SYSCFG_BASEADDR               (APB2PERIPH_BASEADDR + 0x3800)
+
+/*
+* peripheral register definition struct for GPIO
+*/
+  
+typedef struct{
+  volatile uint32_t MODER;            /* GPIO port mode register,          Address offset x00 */
+  volatile uint32_t OTYPER;           /* GPIO port output speed register,  Address offset x08 */
+  volatile uint32_t OSPEEDR;          /* GPIO port pull-up/pull-down register,  Address offset x0C */
+  volatile uint32_t PUPDR;
+  volatile uint32_t IDR;
+  volatile uint32_t ODR;
+  volatile uint32_t BSRR;
+  volatile uint32_t LCKR;
+  volatile uint32_t AFR [2];          /* AFR[0]: GPIO alternate function low register, AFR[1]: GPIO alternate function high register, Address offset 0x20 - 0x24 */
+}GPIO_RegDef_t;
+
+/*
+* peripheral definitions ( Peripheral base addresses typecast to GPIO_RegDef_t)
+*/
+#define GPIOA                         ((GPIO_RegDef_t*)GPIOA_BASEADDR)
+#define GPIOB                         ((GPIO_RegDef_t*)GPIOB_BASEADDR)
+#define GPIOC                         ((GPIO_RegDef_t*)GPIOC_BASEADDR)
+#define GPIOD                         ((GPIO_RegDef_t*)GPIOD_BASEADDR)
+#define GPIOE                         ((GPIO_RegDef_t*)GPIOE_BASEADDR)
+#define GPIOF                         ((GPIO_RegDef_t*)GPIOF_BASEADDR)
+#define GPIOG                         ((GPIO_RegDef_t*)GPIOG_BASEADDR)
+#define GPIOH                         ((GPIO_RegDef_t*)GPIOH_BASEADDR)
+
+
+/*
+* peripheral register definition struct for GPIO  .------- TODO:  - Ep:85
+*/
+
+typedef struct{
+  
+  
+  
+}RCC_RegDef_t
+
+
 
 
 
