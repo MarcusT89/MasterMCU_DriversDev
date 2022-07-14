@@ -20,50 +20,51 @@
 * AHBx and APBx Bus peripheral base addresses
 */
 
-#define PERIPH_BASE                   0x40000000U
-#define APB1PERIPH_BASE               PERIPH_BASE
-#define APB2PERIPH_BASE               0x40010000U               
-#define AHB1PERIPH_BASE               0x40020000U
-#define AHB2PERIPH_BASE               0x50000000U
+#define PERIPH_BASEADDR               0x40000000U
+#define APB1PERIPH_BASEADDR           PERIPH_BASEADDR
+#define APB2PERIPH_BASEADDR           0x40010000U               
+#define AHB1PERIPH_BASEADDR           0x40020000U
+#define AHB2PERIPH_BASEADDR           0x50000000U
 
 /*
 * peripheral base addresses whitch are hanging on AHB1 base
 */
 
-#define GPIOA_BASEADDR                (AHB1PERIPH_BASE + 0x0000)
-#define GPIOB_BASEADDR                (AHB1PERIPH_BASE + 0x0400)
-#define GPIOC_BASEADDR                (AHB1PERIPH_BASE + 0x0800)
-#define GPIOD_BASEADDR                (AHB1PERIPH_BASE + 0x0C00)
-#define GPIOE_BASEADDR                (AHB1PERIPH_BASE + 0x1000)
-#define GPIOF_BASEADDR                (AHB1PERIPH_BASE + 0x1400)
-#define GPIOG_BASEADDR                (AHB1PERIPH_BASE + 0x1800)
-#define GPIOH_BASEADDR                (AHB1PERIPH_BASE + 0x1C00)
+#define GPIOA_BASEADDR                (AHB1PERIPH_BASEADDR + 0x0000)
+#define GPIOB_BASEADDR                (AHB1PERIPH_BASEADDR + 0x0400)
+#define GPIOC_BASEADDR                (AHB1PERIPH_BASEADDR + 0x0800)
+#define GPIOD_BASEADDR                (AHB1PERIPH_BASEADDR + 0x0C00)
+#define GPIOE_BASEADDR                (AHB1PERIPH_BASEADDR + 0x1000)
+#define GPIOF_BASEADDR                (AHB1PERIPH_BASEADDR + 0x1400)
+#define GPIOG_BASEADDR                (AHB1PERIPH_BASEADDR + 0x1800)
+#define GPIOH_BASEADDR                (AHB1PERIPH_BASEADDR + 0x1C00)
 
 /*
-* peripheral base addresses whitch are hanging on APB1 base 
+* peripheral base addresses whitch are hanging on APB1 base /* Episódio  81 */
 * 
 */
 
-#define I2C1_BASEADDR                 (APB1PERIPH_BASE + 0x0000) /* Episódio  81 /*
-#define I2C2_BASEADDR                 (APB1PERIPH_BASE + 0x0000)
-#define I2C3_BASEADDR                 (APB1PERIPH_BASE + 0x0000)
-#define SPI2_BASEADDR                 (APB1PERIPH_BASE + 0x0000)
-#define SPI3_BASEADDR                 (APB1PERIPH_BASE + 0x0000)
-#define USART2_BASEADDR               (APB1PERIPH_BASE + 0x0000)
-#define USART3_BASEADDR               (APB1PERIPH_BASE + 0x0000)
-#define USART4_BASEADDR               (APB1PERIPH_BASE + 0x0000)
-#define USART4_BASEADDR               (APB1PERIPH_BASE + 0x0000)
-#define USART5_BASEADDR               (APB1PERIPH_BASE + 0x0000)
+#define I2C1_BASEADDR                 (APB1PERIPH_BASEADDR + 0x5400) 
+#define I2C2_BASEADDR                 (APB1PERIPH_BASEADDR + 0x5800)
+#define I2C3_BASEADDR                 (APB1PERIPH_BASEADDR + 0x5C00)
+  
+#define SPI2_BASEADDR                 (APB1PERIPH_BASEADDR + 0x3800)
+#define SPI3_BASEADDR                 (APB1PERIPH_BASEADDR + 0x3C00)
+  
+#define USART2_BASEADDR               (APB1PERIPH_BASEADDR + 0x4400)
+#define USART3_BASEADDR               (APB1PERIPH_BASEADDR + 0x4800)
+#define UART4_BASEADDR                (APB1PERIPH_BASEADDR + 0x4C00)
+#define UART5_BASEADDR                (APB1PERIPH_BASEADDR + 0x5000)
 
 /*
 * peripheral base addresses whitch are hanging on APB2 base
 */
 
-#define SPI1_BASEADDR                 (APB2PERIPH_BASE + 0x0000) /* Episódio  81 /*
-#define USART1_BASEADDR               (APB2PERIPH_BASE + 0x0000)
-#define USART6_BASEADDR               (APB2PERIPH_BASE + 0x0000)
-#define EXIT_BASEADDR                 (APB2PERIPH_BASE + 0x0000)
-#define SYSCFG_BASEADDR               (APB2PERIPH_BASE + 0x0000)
+#define SPI1_BASEADDR                 (APB2PERIPH_BASEADDR + 0x3000) 
+#define USART1_BASEADDR               (APB2PERIPH_BASEADDR + 0x1000)
+#define USART6_BASEADDR               (APB2PERIPH_BASEADDR + 0x1400)
+#define EXIT_BASEADDR                 (APB2PERIPH_BASEADDR + 0x3C00)
+#define SYSCFG_BASEADDR               (APB2PERIPH_BASEADDR + 0x3800)
 
 
 
