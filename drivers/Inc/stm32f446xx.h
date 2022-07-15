@@ -38,6 +38,7 @@
 #define GPIOF_BASEADDR                (AHB1PERIPH_BASEADDR + 0x1400)
 #define GPIOG_BASEADDR                (AHB1PERIPH_BASEADDR + 0x1800)
 #define GPIOH_BASEADDR                (AHB1PERIPH_BASEADDR + 0x1C00)
+#define RCC_BASEADDR                  (AHB1PERIPH_BASEADDR + 0x3800)
 
 /*
 * peripheral base addresses whitch are hanging on APB1 base    --- Episódio  81 
@@ -70,15 +71,15 @@
 */
   
 typedef struct{
-  volatile uint32_t MODER;            /* GPIO port mode register,          Address offset x00 */
-  volatile uint32_t OTYPER;           /* GPIO port output speed register,  Address offset x08 */
-  volatile uint32_t OSPEEDR;          /* GPIO port pull-up/pull-down register,  Address offset x0C */
+  volatile uint32_t MODER;                    /* GPIO port mode register,          Address offset 0x00 */
+  volatile uint32_t OTYPER;                   /* GPIO port output speed register,  Address offset 0x08 */
+  volatile uint32_t OSPEEDR;                  /* GPIO port pull-up/pull-down register,  Address offset 0x0C */
   volatile uint32_t PUPDR;
   volatile uint32_t IDR;
   volatile uint32_t ODR;
   volatile uint32_t BSRR;
   volatile uint32_t LCKR;
-  volatile uint32_t AFR [2];          /* AFR[0]: GPIO alternate function low register, AFR[1]: GPIO alternate function high register, Address offset 0x20 - 0x24 */
+  volatile uint32_t AFR [2];                  /* AFR[0]: GPIO alternate function low register, AFR[1]: GPIO alternate function high register, Address offset 0x20 - 0x24 */
 }GPIO_RegDef_t;
 
 /*
@@ -93,20 +94,59 @@ typedef struct{
 #define GPIOG                         ((GPIO_RegDef_t*)GPIOG_BASEADDR)
 #define GPIOH                         ((GPIO_RegDef_t*)GPIOH_BASEADDR)
 
-
 /*
-* peripheral register definition struct for GPIO  .------- TODO:  - Ep:85
+* peripheral register definition struct for GPIO  . - Ep:85
 */
 
 typedef struct{
+  volatile uint32_t CR;                        /*RCC clock control register,  Address offset 0x00 */
+  volatile uint32_t PLLCFGR;                   /*RCC PLL configuration register,  Address offset 0x04 */
+  volatile uint32_t CFGR;                      /*RCC clock configuration register,  Address offset 0x08 */
+  volatile uint32_t CIR;                       /*RCC clock interrupt register,  Address offset 0x0C */
+  volatile uint32_t AHB1RSTR;                  
+  volatile uint32_t AHB2RSTR;
+  volatile uint32_t AHB3RSTR;
+  uint32_t RCC_RESERVED0;                     /*Reserved, 0x1C */
+  volatile uint32_t APB1RSTR;
+  volatile uint32_t APB2RSTR;
+  uint32_t RCC_RESERVED1;
+  uint32_t RCC_RESERVED2;
+  volatile uint32_t AHB1ENR;
+  volatile uint32_t AHB2ENR;
+  volatile uint32_t AHB3ENR;
+  uint32_t RCC_RESERVED3;
+  volatile uint32_t APB1ENR;
+  volatile uint32_t APB2ENR;
+  uint32_t RCC_RESERVED4;
+  uint32_t RCC_RESERVED5;
+  volatile uint32_t AHB1LPENR;
+  volatile uint32_t AHB2LPENR;
+  volatile uint32_t AHB3LPENR;
+  uint32_t RCC_RESERVED6;
+  volatile uint32_t APB1LPENR;
+  volatile uint32_t APB2LPENR;
+  uint32_t RCC_RESERVED7;
+  uint32_t RCC_RESERVED8;
+  volatile uint32_t BDCR;
+  volatile uint32_t CSR;
+  uint32_t RCC_RESERVED9;
+  uint32_t RCC_RESERVED10;
+  volatile uint32_t SSCGR;
+  volatile uint32_t PLLI2SCFGR;
+  volatile uint32_t PLLSAICFGR;
+  volatile uint32_t DCKCFGR;
+  volatile uint32_t CKGATENR;
+  volatile uint32_t DCKCFGR2;
   
-  
-  
-}RCC_RegDef_t
+}RCC_RegDef_t;
 
+#define RCC                           ((RCC_RegDef_t*)RCC_BASEADDR)
 
+/*
+* Clock Enable Macros for GPIOx peripherals
+*/
 
-
+#define GPIOA_PCLK_EN()                RCC->AHB1ENR |= (1 << 0)
 
 
 
