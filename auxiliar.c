@@ -23,14 +23,45 @@ typedef struct{
 /*
 * Handle stucture for GPIO pin
 */
-
-typedef stuct{
+typedef struct{
   GPIO_RegDef_t *pGPIOx;                     /* this holds the base address of the GPIO port to which the pin belongs */
   GPIO_PinConfig_t GPIO_PinConfig;           /* Yhis holds GPIO pin configuration settings */
-
-
-
 }GPIO_Handle_t;
+
+
+//   --------------------  API Prototypes  --------------------------- // ep. 90
+
+/*
+* Peripheral Clock Setup
+*/
+void GPIO_PeriClockControl(GPIO_regDef_t *pGPIOx, uint8_t EnorDi);     //don't forget to creat a #defintion for enable disable
+
+/*
+* Peripheral Init and DeInit
+*/
+void GPIO_Init(GPIO_Handle_t *pGPIOHandle);
+void GPIO_DeInit(GPIO_regDef_t *pGPIOx);       <----- here!
+
+/*
+* Read and Write
+*/
+void GPIO_ReadFromInputPin(void);
+void GPIO_ReadFromInputPort(void);
+void GPIO_WriteToOutputPin(void);
+void GPIO_WriteToOutputPort(void);
+void GPIO_ToggleOutputPin(void);
+
+/*
+* IRQ configuration and ISR handling
+*/
+void GPIO_IRQConfig(void);
+void GPIO_IRQHandling(void);
+
+
+
+
+
+
 
 
 
