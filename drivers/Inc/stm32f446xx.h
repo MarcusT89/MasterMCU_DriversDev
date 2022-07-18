@@ -27,7 +27,7 @@
 #define AHB2PERIPH_BASEADDR           0x50000000U
 
 /*
-* peripheral base addresses whitch are hanging on AHB1 base
+* peripheral base addresses which are hanging on AHB1 base
 */
 
 #define GPIOA_BASEADDR                (AHB1PERIPH_BASEADDR + 0x0000)
@@ -41,7 +41,7 @@
 #define RCC_BASEADDR                  (AHB1PERIPH_BASEADDR + 0x3800)
 
 /*
-* peripheral base addresses whitch are hanging on APB1 base    --- Episódio  81 
+* peripheral base addresses which are hanging on APB1 base    --- Episódio  81
 */
 
 #define I2C1_BASEADDR                 (APB1PERIPH_BASEADDR + 0x5400) 
@@ -57,7 +57,7 @@
 #define UART5_BASEADDR                (APB1PERIPH_BASEADDR + 0x5000)
 
 /*
-* peripheral base addresses whitch are hanging on APB2 base
+* peripheral base addresses which are hanging on APB2 base
 */
 
 #define SPI1_BASEADDR                 (APB2PERIPH_BASEADDR + 0x3000) 
