@@ -94,25 +94,34 @@ typedef struct{
 
 //   --------------------  API Prototypes  --------------------------- // ep. 90
 
-/*
-* Peripheral Clock Setup
-*/
-void GPIO_PeriClockControl(GPIO_regDef_t *pGPIOx, uint8_t EnorDi);     //don't forget to create a #definition for enable disable
+
+
+/**
+ * @brief Peripheral Clock Setup
+ *
+ * Peripheral Clock Setup of a given a pointer GPIO
+ *
+ * @param pGPIOx Pointer to a GPIO reg
+ * @param ENorDI Enalbe or disable
+ *
+ * @return void.
+ */
+void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t ENorDI);     //don't forget to create a #definition for enable disable
 
 /*
 * Peripheral Init and DeInit
 */
 void GPIO_Init(GPIO_Handle_t *pGPIOHandle);
-void GPIO_DeInit(GPIO_regDef_t *pGPIOx);       // <----- here!
+void GPIO_DeInit(GPIO_RegDef_t *pGPIOx);
 
 /*
 * Read and Write
 */
-uint8_t GPIO_ReadFromInputPin(GPIO_regDef_t *pGPIOx, uint8_t PinNumber);
-uint16_t GPIO_ReadFromInputPort(GPIO_regDef_t *pGPIOx);
-void GPIO_WriteToOutputPin(GPIO_regDef_t *pGPIOx, uint8_t PinNumber, uint8_t Value);
-void GPIO_WriteToOutputPort(GPIO_regDef_t *pGPIOx, uint16_t Value);
-void GPIO_ToggleOutputPin(GPIO_regDef_t *pGPIOx, uint8_t PinNumber);
+uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
+uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx);
+void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t Value);
+void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value);
+void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 
 /*
 * IRQ configuration and ISR handling

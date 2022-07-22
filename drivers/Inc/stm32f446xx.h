@@ -14,7 +14,7 @@
 #define SRAM1_BASEADDR                0X20000000U  /* SRAM1 base address */
 #define SRAM2_BASEADDR                0x2001C000U  /* SRAM1 base address */
 #define ROM_BASEADDR                  0x1FFF0000U  /* = System memory */
-#define SRAM                          SRAM1_BASEADDR /* Macro for 
+#define SRAM                          SRAM1_BASEADDR /* Macro for */
 
 /*
 * AHBx and APBx Bus peripheral base addresses

@@ -5,8 +5,8 @@
  *      Author: MarcusT
  */
 
-
-#include "stm32f446xx_gpio_driver.c"
+#include <stdint.h>
+#include "stm32f446xx_gpio_driver.h"
 
 
 
@@ -14,7 +14,7 @@
 /*
 * Peripheral Clock Setup
 */
-void GPIO_PeriClockControl(GPIO_regDef_t *pGPIOx, uint8_t ENorDI){     
+void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t ENorDI){
   
   if(ENorDI == ENABLE)
   {
@@ -78,17 +78,17 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
   
   //2. configure speed
   temp = 0;
-  tmep = pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber)); 
+  temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
   pGPIOHandle->pGPIOx->OSPEEDR |= temp;
   
   //3. configure popup popdown setting
   temp = 0;
-  tmep = pGPIOHandle->GPIO_PinConfig.PinPuPdControl << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber)); 
+  temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
   pGPIOHandle->pGPIOx->PUPDR |= temp;
     
   //4. configure optype
   temp = 0;
-  tmep = pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType <<  pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber); 
+  temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType <<  pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
   pGPIOHandle->pGPIOx->OTYPER |= temp;
   //5. configure alt functionality
   
@@ -97,26 +97,26 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 
 
 
-void GPIO_DeInit(GPIO_regDef_t *pGPIOx){
+void GPIO_DeInit(GPIO_RegDef_t *pGPIOx){
 
 }      
 
 /*
 * Read and Write
 */
-uint8_t GPIO_ReadFromInputPin(GPIO_regDef_t *pGPIOx, uint8_t PinNumber){
+uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
 
 }
-uint16_t GPIO_ReadFromInputPort(GPIO_regDef_t *pGPIOx){
+uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx){
 
 }
-void GPIO_WriteToOutputPin(GPIO_regDef_t *pGPIOx, uint8_t PinNumber, uint8_t Value){
+void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t Value){
 
 }
-void GPIO_WriteToOutputPort(GPIO_regDef_t *pGPIOx, uint16_t Value){
+void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value){
 
 }
-void GPIO_ToggleOutputPin(GPIO_regDef_t *pGPIOx, uint8_t PinNumber){
+void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
 
 }
 
