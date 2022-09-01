@@ -71,14 +71,14 @@
 */
   
 typedef struct{
-  volatile uint32_t MODER;                    /* GPIO port mode register,              Address offset 0x00 */
-  volatile uint32_t OTYPER;                   /* GPIO port output speed register,      Address offset 0x08 */
-  volatile uint32_t OSPEEDR;                  /* GPIO port pull-up/pull-down register, Address offset 0x0C */
-  volatile uint32_t PUPDR;
-  volatile uint32_t IDR;
-  volatile uint32_t ODR;
-  volatile uint32_t BSRR;
-  volatile uint32_t LCKR;
+  volatile uint32_t MODER;                    /* GPIO port mode register,               Address offset 0x00 */
+  volatile uint32_t OTYPER;                   /* GPIO port output type register,        Address offset 0x04 */
+  volatile uint32_t OSPEEDR;                  /* GPIO port output type register, 		Address offset 0x08 */
+  volatile uint32_t PUPDR;                    /* GPIO port pull-up/pull-down register,  Address offset 0x0C */
+  volatile uint32_t IDR;					  /* GPIO port input data register 			Address offset 0x10 */
+  volatile uint32_t ODR;					  /* GPIO port output data register 		Address offset 0x14 */
+  volatile uint32_t BSRR;                     /* GPIO port bit set/reset register, 		Address offset 0x18 */
+  volatile uint32_t LCKR;                     /* GPIO port configuration lock register, Address offset 0x1C */
   volatile uint32_t AFR [2];                  /* AFR[0]: GPIO alternate function low register, AFR[1]: GPIO alternate function high register, Address offset 0x20 - 0x24 */
 }GPIO_RegDef_t;
 
@@ -162,7 +162,7 @@ typedef struct{
 */
 #define I2C1_PCLK_EN()                 RCC->APB1ENR |= (1 << 21)
 #define I2C2_PCLK_EN()                 RCC->APB1ENR |= (1 << 22)
-#define I2C1_PCLK_EN()                 RCC->APB1ENR |= (1 << 23)
+#define I2C3_PCLK_EN()                 RCC->APB1ENR |= (1 << 23)
 
 /*
 * Clock Enable Macros for ISPx peripherals
@@ -203,7 +203,7 @@ typedef struct{
 */
 #define I2C1_PCLK_DI()                 RCC->APB1ENR &= ~(1 << 21)
 #define I2C2_PCLK_DI()                 RCC->APB1ENR &= ~(1 << 22)
-#define I2C1_PCLK_DI()                 RCC->APB1ENR &= ~(1 << 23)
+#define I2C3_PCLK_DI()                 RCC->APB1ENR &= ~(1 << 23)
 
 /*
 * Clock Disable Macros for ISPx peripherals
@@ -233,17 +233,18 @@ typedef struct{
 /*
  * Macros to reset GPIOx peripheral
  */
-#define GPIOA_REG_RESET                do{ (RCC->AHB1ENR |= (1 << 0)); (RCC->AHB1ENR &= ~(1 << 0)); }while(0)
-#define GPIOB_REG_RESET                do{ (RCC->AHB1ENR |= (1 << 1)); (RCC->AHB1ENR &= ~(1 << 1)); }while(0)
-#define GPIOC_REG_RESET                do{ (RCC->AHB1ENR |= (1 << 2)); (RCC->AHB1ENR &= ~(1 << 2)); }while(0)
-#define GPIOD_REG_RESET                do{ (RCC->AHB1ENR |= (1 << 3)); (RCC->AHB1ENR &= ~(1 << 3)); }while(0)
-#define GPIOE_REG_RESET                do{ (RCC->AHB1ENR |= (1 << 4)); (RCC->AHB1ENR &= ~(1 << 4)); }while(0)
-#define GPIOF_REG_RESET                do{ (RCC->AHB1ENR |= (1 << 5)); (RCC->AHB1ENR &= ~(1 << 5)); }while(0)
-#define GPIOG_REG_RESET                do{ (RCC->AHB1ENR |= (1 << 6)); (RCC->AHB1ENR &= ~(1 << 6)); }while(0)
-#define GPIOH_REG_RESET                do{ (RCC->AHB1ENR |= (1 << 7)); (RCC->AHB1ENR &= ~(1 << 7)); }while(0)
+
+#define GPIOA_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 0)); (RCC->AHB1ENR &= ~(1 << 0)); }while(0)
+#define GPIOB_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 1)); (RCC->AHB1ENR &= ~(1 << 1)); }while(0)
+#define GPIOC_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 2)); (RCC->AHB1ENR &= ~(1 << 2)); }while(0)
+#define GPIOD_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 3)); (RCC->AHB1ENR &= ~(1 << 3)); }while(0)
+#define GPIOE_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 4)); (RCC->AHB1ENR &= ~(1 << 4)); }while(0)
+#define GPIOF_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 5)); (RCC->AHB1ENR &= ~(1 << 5)); }while(0)
+#define GPIOG_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 6)); (RCC->AHB1ENR &= ~(1 << 6)); }while(0)
+#define GPIOH_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 7)); (RCC->AHB1ENR &= ~(1 << 7)); }while(0)
 
 // some generic macros
-#define ENABLE         1
+#define ENABLE          1
 #define DISABLE         0
 #define SET             ENABLE
 #define RESET           DISABLE
@@ -253,7 +254,7 @@ typedef struct{
 
 
 
-
+#include "stm32f446xx_gpio_driver.h"
 
 
 
