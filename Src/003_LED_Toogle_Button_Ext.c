@@ -53,8 +53,6 @@ int main (void){				// TESTE THIS FINCTION ON OSCILOSCOPE SEE UP
 			GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_5);
 		}
 
-
-
 	}
 
 
