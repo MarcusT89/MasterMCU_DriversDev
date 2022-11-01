@@ -61,10 +61,10 @@ typedef struct{
 #define GPIO_MODE_IN              0
 #define GPIO_MODE_OUT             1
 #define GPIO_MODE_ALTFN           2
-#define GPIO_MODE_ANALOG          3
+#define GPIO_MODE_ANALOG          3 // 0 to 3 are non interrupting mode! - see this when configuring PIN mode
 #define GPIO_MODE_IT_FT           4
 #define GPIO_MODE_IT_RT           5
-#define GPIO_MODE_IT_FR           6
+#define GPIO_MODE_IT_FRT          6
 
 /*
 * @GPIO_PIN_OPTYPE

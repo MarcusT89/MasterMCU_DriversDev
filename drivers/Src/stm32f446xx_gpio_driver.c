@@ -80,14 +80,32 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 {
   uint32_t temp = 0; // temp register
   
-  //1. configure Gpio pin Mode
-  if (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG){
+  //1. configure Gpio pin Mode (aula: 95)
+  if (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG){ // look at the " GPIO pin possible mode" in this.h 0 to 3 are non interrupting modes
     temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
     pGPIOHandle->pGPIOx->MODER &= ~(0x3 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber); //clearing
     pGPIOHandle->pGPIOx->MODER |= temp; //setting
   }
-  else {
-    // for interrupts
+  else
+  {
+	  // for interrupt  mode
+	  if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_IT_FT)
+	  {
+		  //1. configure the FTSR
+	  }
+	  else if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_IT_RT)
+	  {
+		  //1. configure the rTSR
+	  }
+	  else if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_IT_FRT)
+	  {
+		  //1. configure the FTSR
+	  }
+	  // 2. Configure the GPIO port selection in SYSCFG_EXTICR
+
+	  // 3. enable the EXTI interrupt delivery using IMR
+
+
   }
   
   //2. configure speed
