@@ -92,19 +92,28 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 	  if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_IT_FT)
 	  {
 		  //1. configure the FTSR
+		  EXIT->FTSR |= ( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+		  // clear the corresponding RTSR bit
+		  EXIT->RTSR &= ~( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
 	  }
 	  else if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_IT_RT)
 	  {
 		  //1. configure the rTSR
+		  EXIT->RTSR |= ( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+		  // clear the corresponding RTSR bit
+		  EXIT->FTSR &= ~( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
 	  }
 	  else if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_IT_FRT)
 	  {
 		  //1. configure the FTSR
+		  EXIT->FTSR |= ( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+		  // clear the corresponding RTSR bit
+		  EXIT->RTSR |= ( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
 	  }
 	  // 2. Configure the GPIO port selection in SYSCFG_EXTICR
 
 	  // 3. enable the EXTI interrupt delivery using IMR
-
+	  EXIT->IMR |= ( 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
 
   }
   
