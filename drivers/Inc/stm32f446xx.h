@@ -139,11 +139,25 @@ typedef struct{
   volatile uint32_t PLLSAICFGR;
   volatile uint32_t DCKCFGR;
   volatile uint32_t CKGATENR;
-  volatile uint32_t DCKCFGR2;
-  
+  volatile uint32_t DCKCFGR2;  
 }RCC_RegDef_t;
 
+typedef struct
+{
+  volatile uint32_t IMR;                 /*!< Something with EXTI,         Address offset 0x00 */
+  volatile uint32_t EMR;                 /*!< Something with EXTI,         Address offset 0x04 */
+  volatile uint32_t RTSR;                 /*!< Something with EXTI,         Address offset 0x08 */
+  volatile uint32_t FTSR;                 /*!< Something with EXTI,         Address offset 0x0C */
+  volatile uint32_t SWIER;                 /*!< Something with EXTI,         Address offset 0x10 */
+  volatile uint32_t PR;                 /*!< Something with EXTI,         Address offset 0x14 */  
+  
+}EXTI_RegDef_t;
+
+
+
 #define RCC                           ((RCC_RegDef_t*)RCC_BASEADDR)
+
+#define EXTI                          ((EXTI_RegDef_t*)EXIT_BASEADDR)
 
 /*
 * Clock Enable Macros for GPIOx peripherals
