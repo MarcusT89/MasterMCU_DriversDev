@@ -149,15 +149,28 @@ typedef struct
   volatile uint32_t RTSR;                 /*!< Something with EXTI,         Address offset 0x08 */
   volatile uint32_t FTSR;                 /*!< Something with EXTI,         Address offset 0x0C */
   volatile uint32_t SWIER;                 /*!< Something with EXTI,         Address offset 0x10 */
-  volatile uint32_t PR;                 /*!< Something with EXTI,         Address offset 0x14 */  
-  
+  volatile uint32_t PR;                 /*!< Something with EXTI,         Address offset 0x14 */    
 }EXTI_RegDef_t;
 
+
+typedef struct
+{
+  volatile uint32_t MEMRMP;                /*!< Something with EXTI,         Address offset 0x00 */
+  volatile uint32_t PMC;                   /*!< Something with EXTI,         Address offset 0x04 */
+  volatile uint32_t EXTICR[4];             /*!< Something with EXTI,         Address offset 0x08-0X14 */
+  uint32_t RESERVED1[2];                   /*!< Something with SYSCFG,         Address offset 0x1C */
+  volatile uint32_t CMPCR;                 /*!< Something with EXTI,         Address offset 0x20 */
+  uint32_t RESERVED2[2];                   /*!< Something with SYSCFG,         Address offset 0x28 */
+  volatile uint32_t CFGR;                  /*!< Something with EXTI,         Address offset 0x2C */    
+}SYSCFG_RegDef_t;
 
 
 #define RCC                           ((RCC_RegDef_t*)RCC_BASEADDR)
 
 #define EXTI                          ((EXTI_RegDef_t*)EXIT_BASEADDR)
+
+#define SYSCFG                        ((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
+
 
 /*
 * Clock Enable Macros for GPIOx peripherals
@@ -256,6 +269,13 @@ typedef struct
 #define GPIOF_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 5)); (RCC->AHB1ENR &= ~(1 << 5)); }while(0)
 #define GPIOG_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 6)); (RCC->AHB1ENR &= ~(1 << 6)); }while(0)
 #define GPIOH_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 7)); (RCC->AHB1ENR &= ~(1 << 7)); }while(0)
+
+
+/*
+ * return port code for given GPIOx base address
+ */
+
+ // #define GPIO_BASEADDR_TO_CODE(x)
 
 // some generic macros
 #define ENABLE          1
