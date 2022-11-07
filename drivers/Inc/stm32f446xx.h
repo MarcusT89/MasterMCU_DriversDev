@@ -8,6 +8,34 @@
 #ifndef INC_STM32F446XX_H_
 #define INC_STM32F446XX_H_
 
+
+/*
+* ARM Cortex M4 Processor NVIC ISERx register Addresses
+*/
+
+#define NVIC_ISER0				(( volatile uint32_t*) 0xE000E100)
+#define NVIC_ISER1				(( volatile uint32_t*) 0xE000E104)
+#define NVIC_ISER2				(( volatile uint32_t*) 0xE000E108)
+#define NVIC_ISER3				(( volatile uint32_t*) 0xE000E10C)
+
+/*
+* ARM Cortex M4 Processor NVIC ICERx register Addresses
+*/
+
+#define NVIC_ICER0				(( volatile uint32_t*) 0xE000E180)
+#define NVIC_ICER1				(( volatile uint32_t*) 0xE000E184)
+#define NVIC_ICER2				(( volatile uint32_t*) 0xE000E188)
+#define NVIC_ICER3				(( volatile uint32_t*) 0xE000E18C)
+
+/*
+* ARM Cortex M4 Processor Priority Register Addresses Calculation
+*/
+
+#define NVIC_PR_BASE_ADDR				(( volatile uint32_t*) 0xE000E400)
+
+#define NO_PR_BITS_IMPLEMENTED 			4
+
+
 /* Base addresses of flash and sram emory */
 
 #define FLASH_BASEADDR                0X08000000U /* (UINT32_T) 0x0800..., SEEK FLASH MEMORY = MAIN MEMORY */
@@ -82,20 +110,6 @@ typedef struct{
   volatile uint32_t AFR [2];                  /* AFR[0]: GPIO alternate function low register, AFR[1]: GPIO alternate function high register, Address offset 0x20 - 0x24 */
 }GPIO_RegDef_t;
 
-/*
-* peripheral definitions ( Peripheral base addresses typecast to GPIO_RegDef_t)
-*/
-#define GPIOA                         ((GPIO_RegDef_t*)GPIOA_BASEADDR)
-#define GPIOB                         ((GPIO_RegDef_t*)GPIOB_BASEADDR)
-#define GPIOC                         ((GPIO_RegDef_t*)GPIOC_BASEADDR)
-#define GPIOD                         ((GPIO_RegDef_t*)GPIOD_BASEADDR)
-#define GPIOE                         ((GPIO_RegDef_t*)GPIOE_BASEADDR)
-#define GPIOF                         ((GPIO_RegDef_t*)GPIOF_BASEADDR)
-#define GPIOG                         ((GPIO_RegDef_t*)GPIOG_BASEADDR)
-#define GPIOH                         ((GPIO_RegDef_t*)GPIOH_BASEADDR)
-
-
-/* --------------------- RCC ----------------------*/
 
 /*
 * peripheral register definition struct for GPIO  . - Ep:85
@@ -142,6 +156,10 @@ typedef struct{
   volatile uint32_t DCKCFGR2;  
 }RCC_RegDef_t;
 
+
+
+
+
 typedef struct
 {
   volatile uint32_t IMR;                 /*!< Something with EXTI,         Address offset 0x00 */
@@ -164,6 +182,18 @@ typedef struct
   volatile uint32_t CFGR;                  /*!< Something with EXTI,         Address offset 0x2C */    
 }SYSCFG_RegDef_t;
 
+
+/*
+* peripheral definitions ( Peripheral base addresses typecast to GPIO_RegDef_t)
+*/
+#define GPIOA                         ((GPIO_RegDef_t*)GPIOA_BASEADDR)
+#define GPIOB                         ((GPIO_RegDef_t*)GPIOB_BASEADDR)
+#define GPIOC                         ((GPIO_RegDef_t*)GPIOC_BASEADDR)
+#define GPIOD                         ((GPIO_RegDef_t*)GPIOD_BASEADDR)
+#define GPIOE                         ((GPIO_RegDef_t*)GPIOE_BASEADDR)
+#define GPIOF                         ((GPIO_RegDef_t*)GPIOF_BASEADDR)
+#define GPIOG                         ((GPIO_RegDef_t*)GPIOG_BASEADDR)
+#define GPIOH                         ((GPIO_RegDef_t*)GPIOH_BASEADDR)
 
 #define RCC                           ((RCC_RegDef_t*)RCC_BASEADDR)
 
@@ -272,10 +302,17 @@ typedef struct
 
 
 /*
- * return port code for given GPIOx base address
+ * return port code for given GPIOx base address made for SYSCFG_EXTIx
  */
 
- // #define GPIO_BASEADDR_TO_CODE(x)
+#define GPIO_BASEADDR_TO_CODE(x)		 ( (x == GPIOA) ? 0 : \
+										   (x == GPIOB) ? 1 : \
+										   (x == GPIOC) ? 2 : \
+										   (x == GPIOD) ? 3 : \
+										   (x == GPIOE) ? 4 : \
+										   (x == GPIOF) ? 5 : \
+										   (x == GPIOG) ? 6 : \
+										   (x == GPIOH) ? 7 : 0 )
 
 // some generic macros
 #define ENABLE          1

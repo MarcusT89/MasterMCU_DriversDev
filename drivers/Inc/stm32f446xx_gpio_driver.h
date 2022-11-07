@@ -12,7 +12,7 @@
 #include "stm32f446xx.h"
 
 /*
-* This is configuration stucture for a GPIO pin
+* This is configuration structure for a GPIO pin
 */
 typedef struct{
   uint8_t GPIO_PinNumber;               /*!< Possible variables from @GPIO_PIN_PINNUM >*/
@@ -24,7 +24,7 @@ typedef struct{
 }GPIO_PinConfig_t;
 
 /*
-* Handle stucture for GPIO pin
+* Handle structure for GPIO pin
 */
 typedef struct{
   GPIO_RegDef_t *pGPIOx;                     /* this holds the base address of the GPIO port to which the pin belongs */
@@ -126,7 +126,8 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 /*
 * IRQ configuration and ISR handling
 */
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t ENorDI);
+void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t ENorDI);
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 void GPIO_IRQHandling(uint8_t PinNumber);
 
 
