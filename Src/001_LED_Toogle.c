@@ -10,7 +10,7 @@
 
 
 
-/*
+
 #include <stdint.h>
 #include "stm32f446xx.h"
 
@@ -26,9 +26,9 @@ int main (void){				// TESTE THIS FINCTION ON OSCILOSCOPE SEE UP
 	GPIO_Handle_t GpioLed;
 
 	GpioLed.pGPIOx = GPIOA;
-	GpioLed.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_5;
+	GpioLed.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_6;
 	GpioLed.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
-	GpioLed.GPIO_PinConfig.GPIO_PinOPType = GPIO_OTYPER_OD;
+	GpioLed.GPIO_PinConfig.GPIO_PinOPType = GPIO_OTYPER_PP;
 	GpioLed.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_HIGH;
 	GpioLed.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
 
@@ -37,11 +37,11 @@ int main (void){				// TESTE THIS FINCTION ON OSCILOSCOPE SEE UP
 
 	while(1)
 	{
-		GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_5);
+		GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_6);
 		Delay(500000);
 	}
 
 
 	return 0;
 }
-*/
+
