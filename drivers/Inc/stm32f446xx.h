@@ -88,7 +88,8 @@
 * peripheral base addresses which are hanging on APB2 base
 */
 
-#define SPI1_BASEADDR                 (APB2PERIPH_BASEADDR + 0x3000) 
+#define SPI1_BASEADDR                 (APB2PERIPH_BASEADDR + 0x3000)
+#define SPI4_BASEADDR                 (APB2PERIPH_BASEADDR + 0x3400)
 #define USART1_BASEADDR               (APB2PERIPH_BASEADDR + 0x1000)
 #define USART6_BASEADDR               (APB2PERIPH_BASEADDR + 0x1400)
 #define EXIT_BASEADDR                 (APB2PERIPH_BASEADDR + 0x3C00)
@@ -156,10 +157,6 @@ typedef struct{
   volatile uint32_t DCKCFGR2;  
 }RCC_RegDef_t;
 
-
-
-
-
 typedef struct
 {
   volatile uint32_t IMR;                 /*!< Something with EXTI,         Address offset 0x00 */
@@ -183,6 +180,22 @@ typedef struct
 }SYSCFG_RegDef_t;
 
 
+
+typedef struct
+{
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t SR;
+	volatile uint32_t DR;
+	volatile uint32_t CRCPR;
+	volatile uint32_t RXCRCR;
+	volatile uint32_t TXCRCR;
+	volatile uint32_t I2SCFGR;
+	volatile uint32_t I2SPR;
+}SPI_RegDef_t;
+
+
+
 /*
 * peripheral definitions ( Peripheral base addresses typecast to GPIO_RegDef_t)
 */
@@ -196,10 +209,13 @@ typedef struct
 #define GPIOH                         ((GPIO_RegDef_t*)GPIOH_BASEADDR)
 
 #define RCC                           ((RCC_RegDef_t*)RCC_BASEADDR)
-
 #define EXTI                          ((EXTI_RegDef_t*)EXIT_BASEADDR)
-
 #define SYSCFG                        ((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
+
+#define SPI1						  ((SPI_RegDef_t*)SPI1_BASEADDR)
+#define SPI2						  ((SPI_RegDef_t*)SPI2_BASEADDR)
+#define SPI3						  ((SPI_RegDef_t*)SPI3_BASEADDR)
+#define SPI4						  ((SPI_RegDef_t*)SPI4_BASEADDR)
 
 
 /*
@@ -227,6 +243,7 @@ typedef struct
 #define SPI1_PCLK_EN()                 RCC->APB2ENR |= (1 << 12)
 #define SPI2_PCLK_EN()                 RCC->APB1ENR |= (1 << 14)
 #define SPI3_PCLK_EN()                 RCC->APB1ENR |= (1 << 15)
+#define SPI4_PCLK_EN()                 RCC->APB2ENR |= (1 << 13)
 
 /*
 * Clock Enable Macros for USARTx peripherals
@@ -268,6 +285,7 @@ typedef struct
 #define SPI1_PCLK_DI()                 RCC->APB2ENR &= ~(1 << 12)
 #define SPI2_PCLK_DI()                 RCC->APB1ENR &= ~(1 << 14)
 #define SPI3_PCLK_DI()                 RCC->APB1ENR &= ~(1 << 15)
+#define SPI4_PCLK_DI()                 RCC->APB2ENR &= ~(1 << 13)
 
 /*
 * Clock Disable Macros for USARTx peripherals
@@ -300,7 +318,6 @@ typedef struct
 #define GPIOG_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 6)); (RCC->AHB1ENR &= ~(1 << 6)); }while(0)
 #define GPIOH_REG_RESET()                do{ (RCC->AHB1ENR |= (1 << 7)); (RCC->AHB1ENR &= ~(1 << 7)); }while(0)
 
-
 /*
  * return port code for given GPIOx base address made for SYSCFG_EXTIx
  */
@@ -313,6 +330,18 @@ typedef struct
 										   (x == GPIOF) ? 5 : \
 										   (x == GPIOG) ? 6 : \
 										   (x == GPIOH) ? 7 : 0 )
+
+
+/*
+ * Macros to reset SPIx peripheral
+ */
+#define SPI1_REG_RESET()                do{ (RCC->APB2ENR |= (1 << 12)); (RCC->APB2ENR &= ~(1 << 12)); }while(0)
+#define SPI2_REG_RESET()                do{ (RCC->APB1ENR |= (1 << 14)); (RCC->APB1ENR &= ~(1 << 14)); }while(0)
+#define SPI3_REG_RESET()                do{ (RCC->APB1ENR |= (1 << 15)); (RCC->APB1ENR &= ~(1 << 15)); }while(0)
+#define SPI4_REG_RESET()                do{ (RCC->APB2ENR |= (1 << 13)); (RCC->APB2ENR &= ~(1 << 13)); }while(0)
+
+
+
 /*
  *  IRQ (Interrupt Request) number for MCU
  *  EXTI line interrupt - Position in VT(NVIC)
@@ -360,8 +389,45 @@ typedef struct
 
 
 
+/*
+ * Bit position definition of SPI peripheral
+ */
+#define SPI_CR1_REG_CPHA_BIT					0
+#define SPI_CR1_REG_CPOL_BIT					1
+#define SPI_CR1_REG_MASTER_SELEC_BIT			2
+#define SPI_CR1_REG_BR_BIT						3
+#define SPI_CR1_REG_SPI_EN_BIT					6
+#define SPI_CR1_REG_LSB_FIRST_BIT				7
+#define SPI_CR1_REG_SSI_BIT						8
+#define SPI_CR1_REG_SSM_BIT						9
+#define SPI_CR1_REG_RXONLY_BIT					10
+#define SPI_CR1_REG_DFF_BIT						11
+#define SPI_CR1_REG_CRC_NEXT_BIT				12
+#define SPI_CR1_REG_CRC_EN_BIT					13
+#define SPI_CR1_REG_BIDI_OE_BIT					14
+#define SPI_CR1_REG_BIDI_MODE_BIT				15
+
+#define SPI_CR2_REG_RX_DMA_BIT					0
+#define SPI_CR2_REG_TX_DMA_BIT					1
+#define SPI_CR2_REG_SS_OE_BIT					2
+#define SPI_CR2_REG_FRF_BIT						4
+#define SPI_CR2_REG_ERRIE_BIT					5
+#define SPI_CR2_REG_RXNEIE_BIT					6
+#define SPI_CR2_REG_TXEIE_BIT					7
+
+#define SPI_SR_REG_RXNE_BIT						0
+#define SPI_SR_REG_TXE_BIT						1
+#define SPI_SR_REG_CHSIDE_BIT					2
+#define SPI_SR_REG_UDR_BIT						3
+#define SPI_SR_REG_CRCERR_BIT					4
+#define SPI_SR_REG_MODF_BIT						5
+#define SPI_SR_REG_OVR_BIT						6
+#define SPI_SR_REG_BSY_BIT						7
+#define SPI_SR_REG_FRE_BIT						8
+
 
 #include "stm32f446xx_gpio_driver.h"
+#include "stm32f446xx_spi_driver.h"
 
 
 
