@@ -5,17 +5,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Src/001_LED_Toogle.c \
+../Src/006_spi_Tx_testing.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c 
 
 OBJS += \
-./Src/001_LED_Toogle.o \
+./Src/006_spi_Tx_testing.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o 
 
 C_DEPS += \
-./Src/001_LED_Toogle.d \
+./Src/006_spi_Tx_testing.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d 
 
@@ -27,7 +27,7 @@ Src/%.o: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/001_LED_Toogle.d ./Src/001_LED_Toogle.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o
+	-$(RM) ./Src/006_spi_Tx_testing.d ./Src/006_spi_Tx_testing.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o
 
 .PHONY: clean-Src
 

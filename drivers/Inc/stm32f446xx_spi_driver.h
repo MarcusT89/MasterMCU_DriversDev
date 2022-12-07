@@ -59,8 +59,8 @@ typedef struct{
 /*
 * @SPI_DEF
 */
-#define SPI_DEFF_8BITS				0
-#define SPI_DEFF_16BITS				1
+#define SPI_DFF_8BITS				0
+#define SPI_DFF_16BITS				1
 /*
 * @SPI_CPOL
 */
@@ -76,6 +76,20 @@ typedef struct{
 */
 #define SPI_SSM_EN					1		/*!< Enable SSM - For Hardware Management >*/
 #define SPI_SSM_DI					0		/*!< Disable SSM - For Software Management >*/
+
+/*
+* SPI relates status flags definitions
+*/
+#define SPI_SR_RXNE_FLAG			( 1 << SPI_SR_REG_RXNE_BIT)
+#define SPI_SR_TXE_FLAG				( 1 << SPI_SR_REG_TXE_BIT )
+#define SPI_SR_CHSIDE_FLAG			( 1 << SPI_SR_REG_CHSIDE_BIT )
+#define SPI_SR_UDR_FLAG				( 1 << SPI_SR_REG_UDR_BIT )
+#define SPI_SR_CRCERR_FLAG			( 1 << SPI_SR_REG_CRCERR_BIT)
+#define SPI_SR_MODF_FLAG			( 1 << SPI_SR_REG_MODF_BIT )
+#define SPI_SR_OVR_FLAG				( 1 << SPI_SR_REG_OVR_BIT )
+#define SPI_SR_BUSY_FLAG				( 1 << SPI_SR_REG_BSY_BIT )
+#define SPI_SR_FRE_FLAG				( 1 << SPI_SR_REG_FRE_BIT )
+
 
 //   --------------------  API Prototypes  --------------------------- // ep. 136
 
@@ -104,8 +118,8 @@ void SPI_DeInit(SPI_RegDef_t *pSPIx);
  * Data send and receive
  */
 
-void SPI_SendData(SPI_RegDef_t *pSPIx, uint32_t *pTxBuffer, uint32_t Len);
-void SPI_ReceiveData(SPI_RegDef_t *pSPIx, uint32_t *pRxBuffer, uint32_t Len);
+void SPI_SendData(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uint32_t Len);
+void SPI_ReceiveData(SPI_RegDef_t *pSPIx, uint8_t *pRxBuffer, uint32_t Len);
 
 /*
 * IRQ configuration and ISR handling
@@ -114,6 +128,10 @@ void SPI_IRQInterruptConfig(uint8_t IRQNumber, uint8_t ENorDI);
 void SPI_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority);
 void SPI_IRQHandling(SPI_Handle_t *pHandle);
 
-
+/*
+*  Peripheral control
+*/
+void SPI_PeripheralControl(SPI_RegDef_t *pSPIx, uint8_t ENorDI);
+void SPI_SSIConfig(SPI_RegDef_t *pSPIx, uint8_t ENorDI);
 
 #endif /* INC_STM32F446XX_SPI_DRIVER_H_ */

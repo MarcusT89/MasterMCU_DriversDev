@@ -80,6 +80,9 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 {
   uint32_t temp = 0; // temp register
   
+  // Peripheral clock  enable : para não estar sempre a chama-lo na função MAIN
+  GPIO_PeriClockControl(pGPIOHandle->pGPIOx, ENABLE);
+
   //1. configure Gpio pin Mode (aula: 95)
   if (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG){ // look at the " GPIO pin possible mode" in this.h 0 to 3 are non interrupting modes
     temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));

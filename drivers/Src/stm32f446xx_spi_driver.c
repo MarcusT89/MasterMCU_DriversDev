@@ -57,6 +57,10 @@ void SPI_Init(SPI_Handle_t *pSPIHandle)
 	// first configure SPI_CR1  reg
 	uint32_t tempreg = 0;
 
+	// Peripheral clock  enable : para não estar sempre a chama-lo na função MAIN
+	SPI_PeriClockControl(pSPIHandle->pSPIx, ENABLE);
+
+
 	//1. conf the device mode - in bit field 2 of CR1 reg
 	tempreg |= pSPIHandle->SPI_Config.SPI_DeviceMode << 2;
 
@@ -113,15 +117,64 @@ void SPI_DeInit(SPI_RegDef_t *pSPIx)
 }
 
 
+
+
 /*
  * Data send and receive
  */
 
-void SPI_SendData(SPI_RegDef_t *pSPIx, uint32_t *pTxBuffer, uint32_t Len)
+uint8_t SPI_GetFlagStatus(SPI_RegDef_t *pSPIx, uint32_t FlagName)
 {
+	if(pSPIx->SR & FlagName)
+	{
+		return FLAG_SET;
+	}
+	return FLAG_RESET;
+}
+/**
+ * @brief SPI send data
+ *
+ * Peripheral SPI send data
+ *
+ * @param pSPIx Pointer to a SPI reg
+ * @param *pTxBuffer
+ * @param LEN
+ *
+ * @return void.
+ *
+ * @Note  this is a blocking call
+ * 			also it's a polling based call - polling for the TXE flag to SET - this may hang  permanently
+ *
+ */
+void SPI_SendData(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uint32_t Len)
+{
+	while (Len > 0)
+	{
+		//1. wait until SEreg TXEflag is SET = empty
+		//while( ! (pSPIx->SR & (1 << 1)));  --- alternative in a function to check flag
+		while(SPI_GetFlagStatus(pSPIx, SPI_SR_TXE_FLAG) == FLAG_RESET );
+
+		//2. check the DFF bit in CR1
+		if (pSPIx->CR1 & (1 << SPI_CR1_REG_DFF_BIT ))
+		{
+			//16 bit DFF
+			//1. load the data in to the DR - Data register
+			pSPIx->DR = *((uint16_t*)pTxBuffer);
+			Len--;
+			Len--;
+			(uint16_t*)pTxBuffer++;
+		}
+		else
+		{
+			//8 Bit DFF
+			pSPIx->DR = *(pTxBuffer);
+			Len--;
+			pTxBuffer++;
+		}
+	}
 
 }
-void SPI_ReceiveData(SPI_RegDef_t *pSPIx, uint32_t *pRxBuffer, uint32_t Len)
+void SPI_ReceiveData(SPI_RegDef_t *pSPIx, uint8_t *pRxBuffer, uint32_t Len)
 {
 
 }
@@ -141,3 +194,32 @@ void SPI_IRQHandling(SPI_Handle_t *pHandle)
 {
 
 }
+
+
+void SPI_PeripheralControl(SPI_RegDef_t *pSPIx, uint8_t ENorDI)
+{
+	if (ENorDI == ENABLE)
+	{
+		pSPIx->CR1 |= (1 << SPI_CR1_REG_SPI_EN_BIT);
+	}
+	else
+	{
+		pSPIx->CR1 &= ~(1 << SPI_CR1_REG_SPI_EN_BIT);
+	}
+
+}
+
+
+void SPI_SSIConfig(SPI_RegDef_t *pSPIx, uint8_t ENorDI)
+{
+	if (ENorDI == ENABLE)
+	{
+		pSPIx->CR1 |= (1 << SPI_CR1_REG_SSI_BIT);
+	}
+	else
+	{
+		pSPIx->CR1 &= ~(1 << SPI_CR1_REG_SSI_BIT);
+	}
+
+}
+

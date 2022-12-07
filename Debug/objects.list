@@ -1,4 +1,4 @@
-"./Src/001_LED_Toogle.o"
+"./Src/006_spi_Tx_testing.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Startup/startup_stm32f446retx.o"

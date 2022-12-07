@@ -386,6 +386,8 @@ typedef struct
 #define GPIO_PIN_RESET  RESET
 #define HIGH            ENABLE
 #define LOW             DISABLE
+#define FLAG_RESET		RESET
+#define FLAG_SET		SET
 
 
 

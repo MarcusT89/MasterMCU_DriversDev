@@ -20,7 +20,7 @@ typedef struct{
   uint8_t GPIO_PinSpeed;                /*!< Possible variables from @GPIO_PIN_SPEED >*/
   uint8_t GPIO_PinPuPdControl;          /*!< Possible variables from @GPIO_PIN_PUPDR >*/
   uint8_t GPIO_PinOPType;               /*!< Possible variables from @GPIO_PIN_OPTYPE >*/
-  uint8_t GPIO_PinAltFunMode;           /*!< Possible variables from @GPIO_PIN_SPEED >*/
+  uint8_t GPIO_PinAltFunMode;           /*!< Possible variables from @GPIO_PIN_ALTERNATE_FUNCTION >*/
 }GPIO_PinConfig_t;
 
 /*
