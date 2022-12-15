@@ -1,0 +1,5 @@
+007_spi_TXonly_ArduinoSlave.c:19:6:Delay	24	static
+007_spi_TXonly_ArduinoSlave.c:24:6:SPI_GPIOInits	24	static
+007_spi_TXonly_ArduinoSlave.c:52:6:SPI2_Init	24	static
+007_spi_TXonly_ArduinoSlave.c:71:6:GPIO_ButtonInit	24	static
+007_spi_TXonly_ArduinoSlave.c:89:5:main	24	static

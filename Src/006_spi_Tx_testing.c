@@ -38,11 +38,11 @@ void SPI_GPIOInits(void)
 	SPIPins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_14;
 	GPIO_Init(&SPIPins);
 	//MOSI
-	SPIPins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_15;
-	GPIO_Init(&SPIPins);
+	//SPIPins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_15;
+	//GPIO_Init(&SPIPins);
 	//NSS
-	SPIPins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_12;
-	GPIO_Init(&SPIPins);
+	//SPIPins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_12;
+	//GPIO_Init(&SPIPins);
 
 }
 
@@ -84,6 +84,10 @@ int main(void)
 
 	SPI_SendData(SPI2, (uint8_t*)user_data, strlen(user_data));
 
+	//wait until all data is sent - Busy flag from status reg
+	while(! (SPI_GetFlagStatus(SPI2, SPI_SR_REG_BSY_BIT)));
+
+	//Disable SPI enable peripheral
 	SPI_PeripheralControl(SPI2, DISABLE);
 
 	while(1);

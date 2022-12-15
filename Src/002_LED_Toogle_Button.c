@@ -10,7 +10,7 @@
 
 
 
-/*
+
 #include <stdint.h>
 #include "stm32f446xx.h"
 
@@ -61,4 +61,4 @@ int main (void){				// TESTE THIS FINCTION ON OSCILOSCOPE SEE UP
 
 	return 0;
 }
-*/
+

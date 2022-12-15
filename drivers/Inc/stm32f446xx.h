@@ -411,7 +411,7 @@ typedef struct
 
 #define SPI_CR2_REG_RX_DMA_BIT					0
 #define SPI_CR2_REG_TX_DMA_BIT					1
-#define SPI_CR2_REG_SS_OE_BIT					2
+#define SPI_CR2_REG_SSOE_BIT					2
 #define SPI_CR2_REG_FRF_BIT						4
 #define SPI_CR2_REG_ERRIE_BIT					5
 #define SPI_CR2_REG_RXNEIE_BIT					6

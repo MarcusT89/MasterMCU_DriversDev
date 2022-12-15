@@ -87,7 +87,7 @@ typedef struct{
 #define SPI_SR_CRCERR_FLAG			( 1 << SPI_SR_REG_CRCERR_BIT)
 #define SPI_SR_MODF_FLAG			( 1 << SPI_SR_REG_MODF_BIT )
 #define SPI_SR_OVR_FLAG				( 1 << SPI_SR_REG_OVR_BIT )
-#define SPI_SR_BUSY_FLAG				( 1 << SPI_SR_REG_BSY_BIT )
+#define SPI_SR_BUSY_FLAG			( 1 << SPI_SR_REG_BSY_BIT )
 #define SPI_SR_FRE_FLAG				( 1 << SPI_SR_REG_FRE_BIT )
 
 
@@ -133,5 +133,6 @@ void SPI_IRQHandling(SPI_Handle_t *pHandle);
 */
 void SPI_PeripheralControl(SPI_RegDef_t *pSPIx, uint8_t ENorDI);
 void SPI_SSIConfig(SPI_RegDef_t *pSPIx, uint8_t ENorDI);
+void SPI_SSOEConfig(SPI_RegDef_t *pSPIx, uint8_t ENorDI);
 
 #endif /* INC_STM32F446XX_SPI_DRIVER_H_ */

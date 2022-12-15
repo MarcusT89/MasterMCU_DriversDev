@@ -1,4 +1,4 @@
-"./Src/006_spi_Tx_testing.o"
+"./Src/007_spi_TXonly_ArduinoSlave.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Startup/startup_stm32f446retx.o"
