@@ -1,4 +1,4 @@
-"./Src/007_spi_TXonly_ArduinoSlave.o"
+"./Src/009_spi_messege_rcv_it.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Startup/startup_stm32f446retx.o"

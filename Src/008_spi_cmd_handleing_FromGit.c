@@ -114,7 +114,6 @@ uint8_t SPI_verifyResponse(uint8_t ackbyte)
 
 int main(void)
 {
-	char user_data [] = "Hello World";
 
 	uint8_t dummy_write = 0xff;
 	uint8_t dummy_read;
@@ -212,12 +211,6 @@ int main(void)
 			uint8_t analog_read;
 			SPI_ReceiveData(SPI2,&analog_read,1);
 		}
-
-
-
-
-
-
 
 
 		//wait until all data is sent - Busy flag from status reg

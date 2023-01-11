@@ -8,6 +8,8 @@
 #ifndef INC_STM32F446XX_H_
 #define INC_STM32F446XX_H_
 
+#include <stddef.h>
+#include <stdint.h>
 
 /*
 * ARM Cortex M4 Processor NVIC ISERx register Addresses
