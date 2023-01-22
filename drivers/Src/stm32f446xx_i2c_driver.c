@@ -5,7 +5,79 @@
  *      Author: Marcus
  */
 
+/*
+ * Prototype functions
+ */
 
+static void  I2C_GenerateStartCondition(I2C_RegDef_t *pI2Cx);
+static void I2C_ExecuteAddressPhaseWrite(I2C_RegDef_t *pI2Cx, uint8_t SlaveAddr);
+static void I2C_ClearADDRFlag(I2C_Handle_t *pI2CHandle );
+
+
+/* 
+ * Static functions 
+ */
+
+static void I2C_GenerateStartCondition(I2C_RegDef_t *pI2Cx)
+{
+	pI2Cx->CR1 |= ( 1 << I2C_CR1_START);
+}
+static void I2C_ExecuteAddressPhaseWrite(I2C_RegDef_t *pI2Cx, uint8_t SlaveAddr)
+{
+	SlaveAddr = SlaveAddr << 1;
+	SlaveAddr &= ~(1); //SlaveAddr is Slave address + r/nw bit=0
+	pI2Cx->DR = SlaveAddr;
+}
+static void I2C_ClearADDRFlag(I2C_Handle_t *pI2CHandle )
+{
+	uint32_t dummy_read;
+	//check for device mode
+	if(pI2CHandle->pI2Cx->SR2 & ( 1 << I2C_SR2_MSL))
+	{
+		//device is in master mode
+		if(pI2CHandle->TxRxState == I2C_BUSY_IN_RX)
+		{
+			if(pI2CHandle->RxSize  == 1)
+			{
+				//first disable the ack
+				I2C_ManageAcking(pI2CHandle->pI2Cx,DISABLE);
+
+				//clear the ADDR flag ( read SR1 , read SR2)
+				dummy_read = pI2CHandle->pI2Cx->SR1;
+				dummy_read = pI2CHandle->pI2Cx->SR2;
+				(void)dummy_read;
+			}
+
+		}
+		else
+		{
+			//clear the ADDR flag ( read SR1 , read SR2)
+			dummy_read = pI2CHandle->pI2Cx->SR1;
+			dummy_read = pI2CHandle->pI2Cx->SR2;
+			(void)dummy_read;
+
+		}
+
+	}
+	else
+	{
+		//device is in slave mode
+		//clear the ADDR flag ( read SR1 , read SR2)
+		dummy_read = pI2CHandle->pI2Cx->SR1;
+		dummy_read = pI2CHandle->pI2Cx->SR2;
+		(void)dummy_read;
+	}
+
+
+}
+
+
+
+/*
+ *
+ * Init and De-init
+ *
+ */
 void I2C_Init(I2C_Handle_t *pI2CHandle)
 {
 	uint32_t tempreg = 0 ;
@@ -55,7 +127,11 @@ void I2C_Init(I2C_Handle_t *pI2CHandle)
 }
 
 
-
+/* **************
+ *
+ * Data Send and Receive
+ *
+ ****************/
 void I2C_MasterSendData(I2C_Handle_t *pI2CHandle,uint8_t *pTxbuffer, uint32_t Len, uint8_t SlaveAddr,uint8_t Sr)
 {
 	// 1. Generate the START condition
@@ -98,5 +174,101 @@ void I2C_MasterSendData(I2C_Handle_t *pI2CHandle,uint8_t *pTxbuffer, uint32_t Le
 	//   Note: generating STOP, automatically clears the BTF
 	if(Sr == I2C_DISABLE_SR )
 		I2C_GenerateStopCondition(pI2CHandle->pI2Cx);
+
+}
+
+void I2C_MasterReceiveData(I2C_Handle_t *pI2CHandle,uint8_t *pRxBuffer, uint8_t Len, uint8_t SlaveAddr,uint8_t Sr)
+{
+
+}
+uint8_t I2C_MasterSendDataIT(I2C_Handle_t *pI2CHandle,uint8_t *pTxbuffer, uint32_t Len, uint8_t SlaveAddr,uint8_t Sr)
+{
+
+}
+uint8_t I2C_MasterReceiveDataIT(I2C_Handle_t *pI2CHandle,uint8_t *pRxBuffer, uint8_t Len, uint8_t SlaveAddr,uint8_t Sr)
+{
+
+}
+
+void I2C_CloseReceiveData(I2C_Handle_t *pI2CHandle)
+{
+
+}
+void I2C_CloseSendData(I2C_Handle_t *pI2CHandle)
+{
+
+}
+
+
+
+void I2C_SlaveSendData(I2C_RegDef_t *pI2C,uint8_t data)
+{
+
+}
+uint8_t I2C_SlaveReceiveData(I2C_RegDef_t *pI2C)
+{
+
+}
+
+/*************************
+ *
+ * IRQ Configuration and ISR handling
+ *
+ **************************/
+void I2C_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
+{
+
+}
+void I2C_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority)
+{
+
+}
+void I2C_EV_IRQHandling(I2C_Handle_t *pI2CHandle)
+{
+
+}
+void I2C_ER_IRQHandling(I2C_Handle_t *pI2CHandle)
+{
+
+}
+
+/*************************
+ *
+ * Other Peripheral Control APIs
+ *
+ *************************/
+void I2C_PeripheralControl(I2C_RegDef_t *pI2Cx, uint8_t EnOrDi)
+{
+
+}
+uint8_t I2C_GetFlagStatus(I2C_RegDef_t *pI2Cx , uint32_t FlagName)
+{
+	if(pI2Cx->SR1 & FlagName)
+	{
+		return FLAG_SET;
+	}
+	return FLAG_RESET;
+}
+void I2C_ManageAcking(I2C_RegDef_t *pI2Cx, uint8_t EnorDi)
+{
+
+}
+void I2C_GenerateStopCondition(I2C_RegDef_t *pI2Cx)
+{
+
+}
+
+void I2C_SlaveEnableDisableCallbackEvents(I2C_RegDef_t *pI2Cx,uint8_t EnorDi)
+{
+
+}
+
+/**********************
+ *
+ * Application callback
+ *
+ *********************/
+void I2C_ApplicationEventCallback(I2C_Handle_t *pI2CHandle,uint8_t AppEv)
+{
 
 }
