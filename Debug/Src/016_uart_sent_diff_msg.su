@@ -1,0 +1,7 @@
+016_uart_sent_diff_msg.c:31:6:USART2_Init	8	static
+016_uart_sent_diff_msg.c:43:7:USART2_GPIOInit	24	static
+016_uart_sent_diff_msg.c:62:6:GPIO_ButtonInit	32	static
+016_uart_sent_diff_msg.c:89:6:delay	16	static
+016_uart_sent_diff_msg.c:93:5:main	24	static
+016_uart_sent_diff_msg.c:153:6:USART2_IRQHandler	8	static
+016_uart_sent_diff_msg.c:162:6:USART_ApplicationEventCallback	16	static
