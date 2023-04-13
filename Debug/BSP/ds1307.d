@@ -1,4 +1,4 @@
-Src/016_uart_sent_diff_msg.o: ../Src/016_uart_sent_diff_msg.c \
+BSP/ds1307.o: ../BSP/ds1307.c ../BSP/ds1307.h \
  C:/Users/Marcus/STM32CubeIDE/workspace_1.8.0/MasterMCU_DriversDev/drivers/Inc/stm32f446xx.h \
  C:/Users/Marcus/STM32CubeIDE/workspace_1.8.0/MasterMCU_DriversDev/drivers/Inc/stm32f446xx_gpio_driver.h \
  C:/Users/Marcus/STM32CubeIDE/workspace_1.8.0/MasterMCU_DriversDev/drivers/Inc/stm32f446xx.h \
@@ -6,6 +6,8 @@ Src/016_uart_sent_diff_msg.o: ../Src/016_uart_sent_diff_msg.c \
  C:/Users/Marcus/STM32CubeIDE/workspace_1.8.0/MasterMCU_DriversDev/drivers/Inc/stm32f446xx_i2c_driver.h \
  C:/Users/Marcus/STM32CubeIDE/workspace_1.8.0/MasterMCU_DriversDev/drivers/Inc/stm32f446xx_usart_driver.h \
  C:/Users/Marcus/STM32CubeIDE/workspace_1.8.0/MasterMCU_DriversDev/drivers/Inc/stm32f446xx_rcc_driver.h
+
+../BSP/ds1307.h:
 
 C:/Users/Marcus/STM32CubeIDE/workspace_1.8.0/MasterMCU_DriversDev/drivers/Inc/stm32f446xx.h:
 

@@ -1,4 +1,5 @@
-"./Src/016_uart_sent_diff_msg.o"
+"./BSP/ds1307.o"
+"./Src/017_rtc_lcd.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Startup/startup_stm32f446retx.o"
